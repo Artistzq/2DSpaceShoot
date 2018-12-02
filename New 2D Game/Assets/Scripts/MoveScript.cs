@@ -36,7 +36,7 @@ public class MoveScript : MonoBehaviour {
 
 	private void FixedUpdate() 
 	{
-		if(rigidbodyComponent == null)
+	//	if(rigidbodyComponent==null)
 			rigidbodyComponent = GetComponent<Rigidbody2D>();
 		rigidbodyComponent.velocity = movement;	
 	}
