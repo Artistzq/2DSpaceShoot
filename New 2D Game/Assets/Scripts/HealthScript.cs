@@ -2,7 +2,7 @@
  *负责人:
  *版本:
  *提交日期:
- *功能描述:  
+ *功能描述:  挂载在敌人上
  *修改记录: 
 */  
 
@@ -22,6 +22,7 @@ public class HealthScript : MonoBehaviour {
 	public bool isEnemy = true;
 	
 	//造成伤害并检查物体是否应被摧毁
+	//这个销毁的是敌人
 	public void Damage(int damageCount)
 	{
 		hp -= damageCount;
@@ -46,7 +47,7 @@ public class HealthScript : MonoBehaviour {
 			{
 				Damage(shot.damage);
 
-				//销毁子弹
+				//这个销毁的是子弹
 				Destroy(shot.gameObject);
 				//记得要标记gameobject，不然你就会移除脚本
 				//我的理解：如果写成Destroy(shot),那脚本就被移除了，而不是消除掉物体

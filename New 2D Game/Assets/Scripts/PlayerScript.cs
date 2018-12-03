@@ -32,6 +32,22 @@ public class PlayerScript : MonoBehaviour {
 			speed.x * inputX,
 			speed.y * inputY
 		);
+
+		//射击
+		bool shoot = Input.GetButtonDown("Fire1");
+		shoot |= Input.GetButtonDown("Fire2");
+		//注意：对于Mac用户，ctrl+箭头不是个好主意
+
+		if (shoot)
+		{
+			//调用WeaponScript里的Attack函数，传递的参数为bool值false
+			WeaponScript weapon = GetComponent<WeaponScript>();
+			if (weapon != null)
+			{
+				//用false是因为，玩家（player）不是敌人(enemy)
+				weapon.Attack(false);
+			}
+		}
 	}
 
 	void FixedUpdate() 

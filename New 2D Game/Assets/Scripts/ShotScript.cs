@@ -2,7 +2,7 @@
  *负责人:
  *版本:
  *提交日期:
- *功能描述:  
+ *功能描述:  挂载在子弹实体上
  *修改记录: 
 */  
 
@@ -16,10 +16,13 @@ public class ShotScript : MonoBehaviour {
 	/// 施加伤害
 	/// </summary>
 	public int damage = 1;
+
+	//如果
 	public bool isEnemyShot = false;
 	// Use this for initialization
 	void Start () {
 		//2限制时间来避免漏洞
+		// 20sec后子弹就消失
 		Destroy(gameObject, 20); //20sec 
 	}
 }
