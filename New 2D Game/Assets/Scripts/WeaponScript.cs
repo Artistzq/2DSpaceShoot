@@ -2,8 +2,8 @@
  *负责人:
  *版本:
  *提交日期:
- *功能描述:  在该脚本控制的游戏对象（玩家）前，实例化一个子弹实体。
-			挂载在player上
+ *功能描述:  在该脚本控制的游戏对象前，实例化一个子弹实体。
+			挂载在player上;或者敌人上
  *修改记录: 
 */  
 
@@ -38,7 +38,9 @@ public class WeaponScript : MonoBehaviour
 		shootCooldown = 0f;	
 	}
 	
-	void Update () //如果
+	void Update () 
+	//如果冷却大于0，则减去一个delta time，原因未知
+	//目的:使冷却（shottCooldown）始终小于等于0；
 	{
 		if(shootCooldown > 0)
 			shootCooldown -= Time.deltaTime;	
@@ -89,6 +91,8 @@ public class WeaponScript : MonoBehaviour
 
 	/// <summary>
 	/// 这个武器准备好创建一个新投射物了吗？
+	/// 如果shootCooldown<=0成立，函数返回true给变量 CanAttack
+	/// 就能执行WeaponScript.Attack()函数
 	/// </summary>
 	public bool CanAttack
 	{
