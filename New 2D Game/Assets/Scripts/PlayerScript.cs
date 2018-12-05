@@ -58,4 +58,39 @@ public class PlayerScript : MonoBehaviour {
 		//移动游戏物体
 		rigidbodyComponent.velocity = movement;
 	}
+
+	/// <summary>
+	/// 此函数实现玩家与敌人碰撞
+	/// </summary>
+	/// <param name="collision"></param>
+	private void OnCollisionEnter2D(Collision2D collision) //括号里其他碰撞体
+	{
+		bool damagePlayer = false;
+
+		//和敌人碰撞
+		//collision.gameObject:The GameObject whose collider you are colliding with. (Read Only).
+		//你正在与之碰撞体碰撞的物体，即为collision.gameObject；
+		EnemyScript enemy = collision.gameObject.GetComponent<EnemyScript>();
+		if (enemy != null)
+		{
+			//杀死敌人
+			//获得enemy（敌人对象）的HealthScrit组件
+			HealthScript enemyHealth = enemy.GetComponent<HealthScript>();
+			if (enemyHealth != null)
+				enemyHealth.Damage(enemyHealth.hp);	
+				//给敌人造成和hp一样大小的伤害
+				//即消灭敌人
+			
+			damagePlayer = true;
+		}
+
+		//销毁玩家
+		if (damagePlayer) //只有敌人销毁成功，damagePlayer才会变成true
+		                  //如果不销毁敌人，该变量为false，不执行此if语句
+		{
+			HealthScript playerHealth = this.GetComponent<HealthScript>();
+			if (playerHealth != null)
+				playerHealth.Damage(playerHealth.hp);
+		}
+	}
 }

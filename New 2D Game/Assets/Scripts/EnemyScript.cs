@@ -27,6 +27,7 @@ public class EnemyScript : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
+		//此处保证了敌人不会被自己的子弹消灭；
 		foreach (WeaponScript weapon in weapons)
 		{
 		//自动开火

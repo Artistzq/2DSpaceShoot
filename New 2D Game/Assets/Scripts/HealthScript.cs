@@ -2,7 +2,7 @@
  *负责人:
  *版本:
  *提交日期:
- *功能描述:  挂载在敌人上
+ *功能描述:  挂载在敌人和玩家上
  *修改记录: 
 */  
 
@@ -18,6 +18,8 @@ public class HealthScript : MonoBehaviour {
 
 	/// <summary>
 	/// 敌人还是玩家?
+	/// 敌人则布尔变量为ture，碰到玩家的子弹，销毁；碰到敌人自己子弹，没事；
+	/// 玩家则布尔变量为false，碰到玩家子弹没事，
 	/// </summary>
 	public bool isEnemy = true;
 	
@@ -34,7 +36,7 @@ public class HealthScript : MonoBehaviour {
 		}
 	}
 
-	void OnTriggerEnter2D(Collider2D otherCollider)
+	void OnTriggerEnter2D(Collider2D otherCollider)//当子弹碰到实体
 	{
 		//这是个射击吗？
 		ShotScript shot = otherCollider.gameObject.GetComponent<ShotScript>();
@@ -43,12 +45,13 @@ public class HealthScript : MonoBehaviour {
 		if (shot != null)
 		{
 			//避免误伤友军
+			//if括号里的条件：前者默认false；
+			//如果Health挂载在玩家上，false ！= false 返回 flase，不执行销毁；
+			//如果Health挂载在敌人上，false ！=true 返回 true，执行销毁
 			if (shot.isEnemyShot != isEnemy)
 			{
-				Damage(shot.damage);
-
-				//这个销毁的是子弹
-				Destroy(shot.gameObject);
+				Damage(shot.damage);//这个销毁的是该脚本挂载的对象，敌人/玩家
+				Destroy(shot.gameObject);//这个销毁的是子弹
 				//记得要标记gameobject，不然你就会移除脚本
 				//我的理解：如果写成Destroy(shot),那脚本就被移除了，而不是消除掉物体
 			}

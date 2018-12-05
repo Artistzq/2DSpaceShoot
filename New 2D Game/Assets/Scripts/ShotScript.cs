@@ -17,7 +17,7 @@ public class ShotScript : MonoBehaviour {
 	/// </summary>
 	public int damage = 1;
 
-	//如果
+	//是否敌人射击
 	public bool isEnemyShot = false;
 	// Use this for initialization
 	void Start () {
