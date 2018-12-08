@@ -205,7 +205,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shotPrefab: {fileID: 4702019960725708, guid: e998351261c9b6f4493d70d661e02959, type: 2}
-  shootingRate: 1
+  shootingRate: 1.5
 --- !u!114 &114116585843953420
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -242,7 +242,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shotPrefab: {fileID: 4702019960725708, guid: e998351261c9b6f4493d70d661e02959, type: 2}
-  shootingRate: 1
+  shootingRate: 1.5
 --- !u!114 &114936521132661566
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -255,7 +255,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shotPrefab: {fileID: 4702019960725708, guid: e998351261c9b6f4493d70d661e02959, type: 2}
-  shootingRate: 1
+  shootingRate: 1.5
 --- !u!212 &212869815127667816
 SpriteRenderer:
   m_ObjectHideFlags: 1
