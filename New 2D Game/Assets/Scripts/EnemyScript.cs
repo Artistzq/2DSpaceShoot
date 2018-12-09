@@ -16,17 +16,73 @@ using UnityEngine;
 
 public class EnemyScript : MonoBehaviour 
 {
+	private bool hasSpawn;
+	private MoveScript moveScript;
 	private WeaponScript[] weapons;
+	private Collider2D colliderComponent;
+	private SpriteRenderer rendererComponent;	
 
 	private void Awake() 
 	{
 		//只重新激活一次武器
 		weapons = GetComponentsInChildren<WeaponScript>(); //实例化
+
+		//当不需要重生的时候，让脚本失效
+		moveScript = GetComponent<MoveScript>();
+
+		colliderComponent = GetComponent<Collider2D>();
+
+		rendererComponent = GetComponent<SpriteRenderer>();
 	}
 		
-	// Update is called once per frame
+	//1.让所有失效
+	private void Start() 
+	{
+		hasSpawn = false;//还未生成
+
+		//使所有失效
+		//----collider
+		colliderComponent.enabled = false;
+		//----Moving
+		moveScript.enabled = false;
+		//----shooting
+		foreach (WeaponScript weapon in weapons)
+		{
+			weapon.enabled = false;
+		}	
+	}
+
 	void Update () 
 	{
+		//2.检查敌人是否生成
+		if (hasSpawn == false)
+		{
+			if (rendererComponent.IsVisibleFrom(Camera.main))
+				Spawn();
+		}
+		else
+		{
+			//自动开火
+			foreach (WeaponScript weapon in weapons)
+			{
+				if (weapon != null && weapon.enabled && weapon.CanAttack)
+				{
+					weapon.Attack (true);
+				}
+			}
+
+			//超出屏幕?销毁物体
+			if (rendererComponent.IsVisibleFrom(Camera.main) == false)
+			{
+				Destroy(gameObject);
+			}
+		}
+
+
+
+
+
+		/* 
 		//此处保证了敌人不会被自己的子弹消灭；
 		foreach (WeaponScript weapon in weapons)
 		{
@@ -42,5 +98,23 @@ public class EnemyScript : MonoBehaviour
 				weapon.Attack(true);
 			}
 		}	
+		*/
+	}
+
+	//3.激活自己
+	private void Spawn()
+	{
+		hasSpawn = true;
+
+		//激活所有
+		//--Collider
+		colliderComponent.enabled = true;
+		//--Moving
+		moveScript.enabled = true;
+		//--shooting
+		foreach (WeaponScript weapon in weapons)
+		{
+			weapon.enabled = true;
+		}
 	}
 }

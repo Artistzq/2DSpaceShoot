@@ -223,7 +223,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 298803027}
-  - component: {fileID: 298803028}
   m_Layer: 0
   m_Name: 3 - Foreground
   m_TagString: Untagged
@@ -249,20 +248,6 @@ Transform:
   m_Father: {fileID: 1220700313}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &298803028
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 298803026}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbd7709c59b606242bb2cd1259dbf9cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: {x: 1, y: 1}
-  direction: {x: 1, y: 0}
-  isLinkedToCamera: 1
 --- !u!1 &357927136
 GameObject:
   m_ObjectHideFlags: 0
@@ -609,6 +594,7 @@ MonoBehaviour:
   speed: {x: 1.5, y: 1.5}
   direction: {x: -1, y: 0}
   isLinkedToCamera: 0
+  isLooping: 0
 --- !u!1001 &711166571
 Prefab:
   m_ObjectHideFlags: 0
@@ -721,6 +707,7 @@ MonoBehaviour:
   speed: {x: 2.5, y: 2.5}
   direction: {x: -1, y: 0}
   isLinkedToCamera: 0
+  isLooping: 0
 --- !u!1 &953004660
 GameObject:
   m_ObjectHideFlags: 0
@@ -796,6 +783,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &965043943 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1569193394860014, guid: 31652e8445d597549995354926dd6441,
+    type: 2}
+  m_PrefabInternal: {fileID: 585795204}
+--- !u!114 &965043950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 965043943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbd7709c59b606242bb2cd1259dbf9cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: {x: 1, y: 1}
+  direction: {x: 1, y: 0}
+  isLinkedToCamera: 1
+  isLooping: 0
 --- !u!1001 &978475480
 Prefab:
   m_ObjectHideFlags: 0
@@ -1316,6 +1323,7 @@ MonoBehaviour:
   speed: {x: 1, y: 1}
   direction: {x: -1, y: 0}
   isLinkedToCamera: 0
+  isLooping: 1
 --- !u!1001 &1985589522
 Prefab:
   m_ObjectHideFlags: 0

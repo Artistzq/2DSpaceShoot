@@ -9,6 +9,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 /// <summary>
 /// 视差滚动脚本，挂载在一个图层上
@@ -26,10 +27,11 @@ public class ScrollingScript : MonoBehaviour
 	//默认不加在摄像机上，所以设置为否(false)
 	public bool isLinkedToCamera = false;
 
-	//1.背景无限
+	//1.背景无限,默认不无限
 	public bool isLooping = false;
 
 	//2.渲染器子类的一个列表
+	//私有变量储存图层子类
 	private List<SpriteRenderer> backgroundPart;
 
 	//3.获取所有子类
@@ -55,6 +57,7 @@ public class ScrollingScript : MonoBehaviour
 			//笔记: 从左到右获取子类
 			//我们需要添加一点情形
 			//去搞定所有可能的滚动方向
+			//按x坐标排序，x小，即位置在左边的，排到队列的前面
 			backgroundPart = backgroundPart.OrderBy(
 				t => t.transform.position.x
 			).ToList();
@@ -82,10 +85,40 @@ public class ScrollingScript : MonoBehaviour
 		//4.循环
 		if (isLooping)
 		{
-			//获取第一个物体
+			//获取第一个物体储存在List中
 			//这个列表从左到右
-			Transform firstChild = backgroundPart.FirstOrDefault();
+			SpriteRenderer firstChild = backgroundPart.FirstOrDefault(); 
+			//傳回序列的第一個項目；如果找不到任何項目，則傳回預設值。
+			
+			if (firstChild != null)
+			{
+				//检查这个子物体是否已经（部分地）在摄像机前面，
+				//我们首先测试位置，因为这个IsVisibleFrom方法调用有点繁重
+				if (firstChild.transform.position.x < Camera.main.transform.position.x)
+				{	
+					//如果这个子类已经在摄像机的左边，
+					//我们测试它是否!!!完全!!!地在外面且需要循环
+					if (firstChild.IsVisibleFrom(Camera.main) == false)
+					{
+						//获取最后一个子类的位置
+						SpriteRenderer lastChild = backgroundPart.LastOrDefault();
 
+						Vector3 lastPosition = lastChild.transform.position;
+						Vector3 lastsize = (lastChild.bounds.max - lastChild.bounds.min);
+
+						//将被循环的那个子类的位置设置到最后一个子类的后面去。
+						//注意：当前只在水平滚动有效
+
+						firstChild.transform.position = new 
+						Vector3 (lastPosition.x + lastsize.x, firstChild.transform.position.y,
+						firstChild.transform.position.z);
+						
+						//将这个被循环的子类设置到背景渲染器列表的最后一个
+						backgroundPart.Remove(firstChild);
+						backgroundPart.Add(firstChild);				
+					}
+				}
+			}
 		}
 	}
 }
