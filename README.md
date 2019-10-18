@@ -6,4 +6,4 @@
  * @LastEditors: Please set LastEditors
  -->
 # Unity2DPlay
-Unity小游戏教程，学习网址：[用Unity制作一个2D游戏](https://pixelnest.io/tutorials/2d-game-unity/ "666")
+跟随Unity小游戏教程制作的半成品，学习网址：[用Unity制作一个2D游戏](https://pixelnest.io/tutorials/2d-game-unity/ "666")
